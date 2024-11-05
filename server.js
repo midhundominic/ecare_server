@@ -7,10 +7,20 @@ require('dotenv').config();
 const app = express();
 
 // Enable CORS for all routes
-app.use(cors({
-  origin: 'https://euphonious-sunshine-b6409e.netlify.app',
-}));
+const allowedOrigins = [
+  'https://euphonious-sunshine-b6409e.netlify.app',
+  'https://peaceful-kataifi-11d5db.netlify.app'
+];
 
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 // Middleware
 app.use(express.json()); // Parse JSON bodies
 
