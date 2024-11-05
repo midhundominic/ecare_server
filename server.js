@@ -7,7 +7,9 @@ require('dotenv').config();
 const app = express();
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+  origin: 'https://euphonious-sunshine-b6409e.netlify.app',
+}));
 
 // Middleware
 app.use(express.json()); // Parse JSON bodies
